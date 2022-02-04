@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/21 11:43:33 by tessa         #+#    #+#                 */
-/*   Updated: 2022/01/27 15:45:27 by tessa         ########   odam.nl         */
+/*   Updated: 2022/02/04 12:00:03 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int argument_count, char **arguments)
 {
 	t_input	input;
-	
+
 	if (check_initial_input(argument_count, arguments) == INVALID)
 	{
 		printf("invalid\n");

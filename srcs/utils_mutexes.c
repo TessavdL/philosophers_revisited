@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/03 16:51:42 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/03 17:33:48 by tessa         ########   odam.nl         */
+/*   Updated: 2022/02/04 12:04:32 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	set_time_of_last_meal(pthread_mutex_t *mutex,
 {
 	pthread_mutex_lock(mutex);
 	*time_of_last_meal = new_time_of_last_meal;
-	pthread_mutex_unlock(mutex);	
+	pthread_mutex_unlock(mutex);
 }
 
 t_bool	get_status(pthread_mutex_t *mutex, t_bool status)

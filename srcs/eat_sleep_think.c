@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/30 18:48:28 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/03 22:22:19 by tessa         ########   odam.nl         */
+/*   Updated: 2022/02/04 11:59:40 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ static void	eat(t_philosopher *phil)
 	pthread_mutex_unlock(&phil->mutexes.fork.right);
 }
 
-void*	eat_sleep_think(void *ptr)
+void	*eat_sleep_think(void *ptr)
 {
 	t_philosopher	*phil;
 
-	phil = (t_philosopher*)ptr;
+	phil = (t_philosopher *)ptr;
 	while (1)
 	{
 		eat(phil);

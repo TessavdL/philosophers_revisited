@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 14:34:58 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/03 22:21:52 by tessa         ########   odam.nl         */
+/*   Updated: 2022/02/04 12:00:21 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	initialize_individual_mutexes(t_philosopher *phil)
 	return (0);
 }
 
-int	initialize_shared_mutexes(pthread_mutex_t **mutexes, int number_of_philosophers)
+int	initialize_shared_mutexes(pthread_mutex_t **mutexes,
+	int number_of_philosophers)
 {
 	int	i;
 

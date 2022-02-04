@@ -6,7 +6,7 @@
 #    By: tessa <tessa@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/21 11:24:39 by tessa         #+#    #+#                  #
-#    Updated: 2022/02/03 17:59:29 by tessa         ########   odam.nl          #
+#    Updated: 2022/02/04 12:26:21 by tevan-de      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,13 +23,14 @@ SRCS_DIR	=	srcs/
 SRCS		=	check_input.c		\
 				eat_sleep_think.c	\
 				main.c				\
+				monitoring.c		\
 				mutexes.c			\
 				parser.c			\
 				setup_simulation.c	\
 				start_simulation.c	\
 				utils_mutexes.c		\
 				utils_parser.c		\
-				utils.c
+				time.c
 
 OBJS_DIR	=	objs/
 
