@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 15:41:00 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/04 12:28:42 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/04 16:48:16 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,18 @@ static int	join_simulation_threads(t_philosopher *philosophers,
 	return (0);
 }
 
-static int	start_simulation_threads(t_philosopher *philosophers,
+static int	start_threads(t_philosopher *philosophers,
 	int number_of_philosophers)
 {
-	int	i;
+	int			i;
+	long int	time;
 
-	i = 0;	
+	i = 0;
+	time = get_time();
 	while (i < number_of_philosophers)
 	{
+		philosophers[i].time_start = time;
+		philosophers[i].time_of_last_meal = time;
 		if (pthread_create(&philosophers[i].thread.simulation, NULL,
 				&eat_sleep_think, &philosophers[i]))
 		{
@@ -66,16 +70,13 @@ static int	start_simulation_threads(t_philosopher *philosophers,
 		}
 		i++;
 	}
+	start_monitoring_threads(philosophers, number_of_philosophers);
 	return (join_simulation_threads(philosophers, number_of_philosophers));
 }
 
 int	start_simulation(t_philosopher *philosophers, int number_of_philosophers)
 {
-	if (start_simulation_threads(philosophers, number_of_philosophers))
-	{
-		return (1);
-	}
-	if (start_monitoring_threads(philosophers, number_of_philosophers))
+	if (start_threads(philosophers, number_of_philosophers))
 	{
 		return (1);
 	}

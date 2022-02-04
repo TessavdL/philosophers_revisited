@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:22:15 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/04 12:01:44 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/04 17:17:56 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,19 @@ static int	initialize_philosophers(t_philosopher *philosophers, t_bool *dead,
 		philosophers[i].mutexes.fork.left = shared_mutexes[i + 2];
 		if (i == data.number_of_philosophers - 1)
 		{
-			philosophers[i].mutexes.fork.right = shared_mutexes[0];
+			printf("should happen 1 time\n");
+			philosophers[i].mutexes.fork.right = shared_mutexes[2];
 		}
 		else
 		{
+			if (data.number_of_philosophers == 2)
+			{
+				printf("should happen 1 time\n");
+			}
+			else
+			{
+				printf("should happen %d times\n", data.number_of_philosophers - 1);
+			}
 			philosophers[i].mutexes.fork.right = shared_mutexes[i + 3];
 		}
 		philosophers[i].data = data;

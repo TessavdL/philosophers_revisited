@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 14:34:58 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/04 12:00:21 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/04 16:43:01 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	initialize_individual_mutexes(t_philosopher *phil)
 {
-	printf("%p\n", &phil->mutexes.fork.left);
 	if (pthread_mutex_init(&phil->mutexes.full, NULL))
 	{
 		return (1);

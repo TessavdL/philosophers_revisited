@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/21 11:43:33 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/04 12:00:03 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/04 16:40:36 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,17 @@ int	main(int argument_count, char **arguments)
 
 	if (check_initial_input(argument_count, arguments) == INVALID)
 	{
-		printf("invalid\n");
 		return (1);
 	}
 	else
 	{
-		printf("valid\n");
 		parser(argument_count, arguments, &input);
 		if (check_final_input(argument_count, input) == INVALID)
 		{
-			printf("invalid\n");
 			return (1);
 		}
 		if (setup_simulation(input))
 		{
-			printf("error\n");
 			return (1);
 		}
 		return (0);

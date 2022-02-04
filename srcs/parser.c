@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/22 17:12:33 by tessa         #+#    #+#                 */
-/*   Updated: 2022/01/27 13:12:35 by tessa         ########   odam.nl         */
+/*   Updated: 2022/02/04 16:40:54 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,4 @@ void	parser(int argument_count, char **arguments, t_input *input)
 	{
 		input->number_of_meals = UNINITIALIZED;
 	}
-	printf("%d %d %d %d %d\n", input->number_of_philosophers,
-		input->time_until_death, input->time_to_eat, input->time_to_sleep,
-		input->number_of_meals);
 }

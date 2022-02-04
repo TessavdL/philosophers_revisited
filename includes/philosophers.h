@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/22 13:02:29 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/04 12:26:03 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/04 17:18:46 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_input
 typedef struct s_philosopher
 {
 	int				id;
+	long int		time_start;
 	long int		time_of_last_meal;
 	t_input			data;
 	t_bool			*dead;
@@ -104,8 +105,8 @@ int					start_simulation(t_philosopher *philosophers,
 						int number_of_philosophers);
 
 // utils_mutexes.c
-void				print_message(pthread_mutex_t *print, int id,
-						unsigned long time, char *message);
+int					print_message(t_philosopher *phil, long int time,
+						char *message);
 long int			get_time_of_last_meal(pthread_mutex_t *mutex,
 						long int time_of_last_meal);
 void				set_time_of_last_meal(pthread_mutex_t *mutex,
@@ -121,5 +122,6 @@ int					a_to_i(const char *str);
 
 // time.c
 long int			get_time(void);
+void				let_time_pass(long int total_time);
 
 #endif
