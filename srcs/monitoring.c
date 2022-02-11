@@ -6,7 +6,7 @@
 /*   By: tevan-de <tevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/04 12:14:03 by tevan-de      #+#    #+#                 */
-/*   Updated: 2022/02/04 16:52:07 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/11 17:06:44 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,12 @@ void	*monitoring(void *ptr)
 		if (check_if_phil_is_dead(phil) == TRUE)
 		{
 			print_message(phil, get_time() - phil->time_start, "has died");
-			set_status(&phil->mutexes.dead, phil->dead, TRUE);
+			set_status(phil->mutexes.dead, phil->dead, TRUE);
 			break ;
 		}
 		if (phil->data.number_of_meals != UNINITIALIZED
 			&& get_status(&phil->mutexes.full, phil->full) == TRUE)
 		{
-			print_message(phil, get_time() - phil->time_start, "is full");		
 			break ;
 		}
 		usleep(500);

@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/21 11:43:33 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/04 16:40:36 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/11 15:52:45 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argument_count, char **arguments)
 		{
 			return (1);
 		}
-		if (setup_simulation(input))
+		if (setup_simulation(input, input.number_of_philosophers))
 		{
 			return (1);
 		}

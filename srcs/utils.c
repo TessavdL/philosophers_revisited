@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   utils_parser.c                                     :+:    :+:            */
+/*   utils.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 11:47:42 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/04 12:05:20 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/11 16:10:04 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,42 @@ int	a_to_i(const char *str)
 	return (res * sign);
 }
 
-t_bool	character_is_digit(char c)
+t_bool	character_is_digit(const char c)
 {
 	if (c >= '0' && c <= '9')
 	{
 		return (TRUE);
 	}
 	return (FALSE);
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	unsigned char	*p;
+	size_t			i;
+
+	p = malloc(count * size);
+	if (!p)
+	{
+		return (NULL);
+	}
+	i = 0;
+	while (i < (count * size))
+	{
+			p[i] = '\0';
+			i++;
+	}
+	return (p);
+}
+
+int	skip_whitespace(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
+	{
+		i++;
+	}
+	return (i);
 }

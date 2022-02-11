@@ -6,14 +6,14 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 15:41:00 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/04 16:48:16 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/11 17:14:46 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
 static int	start_monitoring_threads(t_philosopher *philosophers,
-	int number_of_philosophers)
+	const int number_of_philosophers)
 {
 	int	i;
 
@@ -35,7 +35,7 @@ static int	start_monitoring_threads(t_philosopher *philosophers,
 }
 
 static int	join_simulation_threads(t_philosopher *philosophers,
-	int number_of_philosophers)
+	const int number_of_philosophers)
 {
 	int	i;
 
@@ -52,7 +52,7 @@ static int	join_simulation_threads(t_philosopher *philosophers,
 }
 
 static int	start_threads(t_philosopher *philosophers,
-	int number_of_philosophers)
+	const int number_of_philosophers)
 {
 	int			i;
 	long int	time;
@@ -68,13 +68,15 @@ static int	start_threads(t_philosopher *philosophers,
 		{
 			return (1);
 		}
+		usleep(500);
 		i++;
 	}
 	start_monitoring_threads(philosophers, number_of_philosophers);
 	return (join_simulation_threads(philosophers, number_of_philosophers));
 }
 
-int	start_simulation(t_philosopher *philosophers, int number_of_philosophers)
+int	start_simulation(t_philosopher *philosophers,
+	const int number_of_philosophers)
 {
 	if (start_threads(philosophers, number_of_philosophers))
 	{

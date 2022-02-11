@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   utils_mutexes.c                                    :+:    :+:            */
+/*   mutexes_utils.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/03 16:51:42 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/04 16:52:30 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/11 17:08:35 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	print_message(t_philosopher *phil, long int time, char *message)
 {
-	if (get_status(&phil->mutexes.dead, *phil->dead) == TRUE)
+	if (get_status(phil->mutexes.dead, *phil->dead) == TRUE)
 		return (1);
-	pthread_mutex_lock(&phil->mutexes.print);
+	pthread_mutex_lock(phil->mutexes.print);
 	printf("[%10ld] Philosopher %d %s\n", time, phil->id, message);
-	pthread_mutex_unlock(&phil->mutexes.print);
+	pthread_mutex_unlock(phil->mutexes.print);
 	return (0);
 }
 

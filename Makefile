@@ -6,7 +6,7 @@
 #    By: tessa <tessa@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/21 11:24:39 by tessa         #+#    #+#                  #
-#    Updated: 2022/02/04 12:26:21 by tevan-de      ########   odam.nl          #
+#    Updated: 2022/02/11 17:18:01 by tevan-de      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,17 +20,18 @@ LDFLAGS		=	-pthread -g -fsanitize=thread
 
 SRCS_DIR	=	srcs/
 
-SRCS		=	check_input.c		\
-				eat_sleep_think.c	\
-				main.c				\
-				monitoring.c		\
-				mutexes.c			\
-				parser.c			\
-				setup_simulation.c	\
-				start_simulation.c	\
-				utils_mutexes.c		\
-				utils_parser.c		\
-				time.c
+SRCS		=	check_input.c				\
+				eat_sleep_think.c			\
+				main.c						\
+				monitoring.c				\
+				mutexes_destruction.c		\
+				mutexes_initialization.c	\
+				mutexes_utils.c				\
+				parser.c					\
+				setup_simulation.c			\
+				start_simulation.c			\
+				time.c						\
+				utils.c
 
 OBJS_DIR	=	objs/
 

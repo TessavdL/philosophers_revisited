@@ -6,13 +6,13 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/22 17:12:33 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/04 16:40:54 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/11 14:59:36 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-void	parser(int argument_count, char **arguments, t_input *input)
+void	parser(const int argument_count, char **arguments, t_input *input)
 {
 	input->number_of_philosophers = a_to_i(arguments[1]);
 	input->time_until_death = a_to_i(arguments[2]);

@@ -6,98 +6,79 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:22:15 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/04 17:17:56 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/11 17:09:58 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-static int	free_and_return_error(t_philosopher *philosophers, t_bool *dead)
+static int free_and_return(t_bool *dead, t_philosopher *philosophers,
+	pthread_mutex_t *shared_mutexes,
+	const int ret)
 {
 	free(dead);
 	free(philosophers);
-	return (1);
+	destroy_all_shared_mutexes(shared_mutexes,
+		philosophers[0].data.number_of_philosophers);
+	free(shared_mutexes);
+	return (ret);
 }
 
-static int	destroy_individual_mutexes(t_philosopher *philosophers, int i)
+static int	initialize_philosophers(t_bool *dead, t_philosopher **philosophers,
+	pthread_mutex_t **shared_mutexes, t_input data)
 {
-	i--;
-	while (i >= 0)
+	int	i;
+
+	*philosophers = ft_calloc(sizeof(t_philosopher), data.number_of_philosophers);
+	if (!(*philosophers))
 	{
-		pthread_mutex_destroy(&philosophers[i].mutexes.full);
-		pthread_mutex_destroy(&philosophers[i].mutexes.time_of_last_meal);
-		i--;
+		return (1);
 	}
-	return (1);
-}
-
-static int	initialize_philosophers(t_philosopher *philosophers, t_bool *dead,
-	t_input data)
-{
-	pthread_mutex_t	*shared_mutexes;
-	int				i;
-
-	if (initialize_shared_mutexes(&shared_mutexes, data.number_of_philosophers))
+	if (initialize_individual_mutexes(philosophers,
+		data.number_of_philosophers))
 	{
 		return (1);
 	}
 	i = 0;
 	while (i < data.number_of_philosophers)
 	{
-		if (initialize_individual_mutexes(&philosophers[i]))
-		{
-			free(shared_mutexes);
-			return (destroy_individual_mutexes(philosophers, i));
-		}
-		philosophers[i].mutexes.fork.left = shared_mutexes[i + 2];
-		if (i == data.number_of_philosophers - 1)
-		{
-			printf("should happen 1 time\n");
-			philosophers[i].mutexes.fork.right = shared_mutexes[2];
-		}
-		else
-		{
-			if (data.number_of_philosophers == 2)
-			{
-				printf("should happen 1 time\n");
-			}
-			else
-			{
-				printf("should happen %d times\n", data.number_of_philosophers - 1);
-			}
-			philosophers[i].mutexes.fork.right = shared_mutexes[i + 3];
-		}
-		philosophers[i].data = data;
-		philosophers[i].dead = dead;
-		philosophers[i].full = FALSE;
-		philosophers[i].id = i + 1;
-		philosophers[i].mutexes.dead = shared_mutexes[DEAD];
-		philosophers[i].mutexes.print = shared_mutexes[PRINT];
+		((*philosophers)[i]).data = data;
+		((*philosophers)[i]).dead = dead;
+		((*philosophers)[i]).full = FALSE;
+		((*philosophers)[i]).id = i + 1;
 		i++;
 	}
+	assign_shared_mutexes(philosophers, shared_mutexes,
+		data.number_of_philosophers);
 	return (0);
 }
 
-int	setup_simulation(t_input data)
+int	setup_simulation(t_input data, const int number_of_philosophers)
 {
+	int				ret;
+	pthread_mutex_t	*shared_mutexes;
 	t_bool			*dead;
 	t_philosopher	*philosophers;
 
-	dead = NULL;
-	philosophers = malloc(sizeof(t_philosopher) * data.number_of_philosophers);
-	if (!philosophers)
+	ret = 1;
+	if (initialize_shared_mutexes(&shared_mutexes, number_of_philosophers))
 	{
-		return (free_and_return_error(philosophers, dead));
+		return (ret);
 	}
-	dead = malloc(sizeof(t_bool));
+	philosophers = NULL;
+	dead = ft_calloc(sizeof(t_bool), 1);
 	if (!dead)
 	{
-		return (free_and_return_error(philosophers, dead));
+		return (free_and_return(dead, philosophers, shared_mutexes, ret));
 	}
-	*dead = FALSE;
-	if (initialize_philosophers(philosophers, dead, data))
+	if (initialize_philosophers(dead, &philosophers, &shared_mutexes, data))
 	{
-		return (free_and_return_error(philosophers, dead));
+		return (free_and_return(dead, philosophers, shared_mutexes, ret));
 	}
-	return (start_simulation(philosophers, data.number_of_philosophers));
+	if (!start_simulation(philosophers, number_of_philosophers))
+	{
+		ret = 0;
+	}
+	destroy_all_individual_mutexes(philosophers, number_of_philosophers);
+	return (free_and_return(dead, philosophers, shared_mutexes, ret));
 }

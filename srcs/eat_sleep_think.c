@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/30 18:48:28 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/04 17:18:57 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/11 17:14:42 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ static void	slep(t_philosopher *phil)
 
 static void	eat(t_philosopher *phil)
 {
-	pthread_mutex_lock(&phil->mutexes.fork.left);
+	pthread_mutex_lock(phil->mutexes.fork.left);
 	if (print_message(phil, get_time() - phil->time_start, "has taken a fork"))
 	{
-		pthread_mutex_unlock(&phil->mutexes.fork.left);
+		pthread_mutex_unlock(phil->mutexes.fork.left);
 		return ;
 	}
-	pthread_mutex_lock(&phil->mutexes.fork.right);
+	pthread_mutex_lock(phil->mutexes.fork.right);
 	if (print_message(phil, get_time() - phil->time_start, "is eating"))
 	{
-		pthread_mutex_unlock(&phil->mutexes.fork.right);
-		pthread_mutex_unlock(&phil->mutexes.fork.left);
+		pthread_mutex_unlock(phil->mutexes.fork.right);
+		pthread_mutex_unlock(phil->mutexes.fork.left);
 		return ;
 	}
 	set_time_of_last_meal(&phil->mutexes.time_of_last_meal,
@@ -46,9 +46,8 @@ static void	eat(t_philosopher *phil)
 	{
 		phil->data.number_of_meals--;
 	}
-	pthread_mutex_unlock(&phil->mutexes.fork.right);
-	pthread_mutex_unlock(&phil->mutexes.fork.left);
-	print_message(phil, get_time() - phil->time_start, "is done eating");
+	pthread_mutex_unlock(phil->mutexes.fork.right);
+	pthread_mutex_unlock(phil->mutexes.fork.left);
 }
 
 void	*eat_sleep_think(void *ptr)
@@ -59,7 +58,7 @@ void	*eat_sleep_think(void *ptr)
 	while (1)
 	{
 		eat(phil);
-		if (get_status(&phil->mutexes.dead, *phil->dead) == TRUE)
+		if (get_status(phil->mutexes.dead, *phil->dead) == TRUE)
 		{
 			break ;
 		}
