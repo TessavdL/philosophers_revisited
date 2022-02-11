@@ -6,7 +6,7 @@
 #    By: tessa <tessa@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/21 11:24:39 by tessa         #+#    #+#                  #
-#    Updated: 2022/02/11 17:18:01 by tevan-de      ########   odam.nl          #
+#    Updated: 2022/02/11 17:23:52 by tevan-de      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC			=	gcc
 
 CFLAGS		=	-Wall -Werror -Wextra
 
-LDFLAGS		=	-pthread -g -fsanitize=thread
+LDFLAGS		=	-pthread
 
 SRCS_DIR	=	srcs/
 

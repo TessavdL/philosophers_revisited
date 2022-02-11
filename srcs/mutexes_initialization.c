@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 14:34:58 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/11 17:09:04 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/11 17:23:00 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	initialize_shared_mutexes(pthread_mutex_t **mutexes,
 	const int	total_number_of_mutexes = 2 + number_of_philosophers;
 	int			i;
 
-	*mutexes = malloc(sizeof(pthread_mutex_t) * total_number_of_mutexes);
+	*mutexes = ft_calloc(sizeof(pthread_mutex_t), total_number_of_mutexes);
 	if (!(*mutexes))
 	{
 		return (1);
