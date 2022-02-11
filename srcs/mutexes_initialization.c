@@ -6,17 +6,17 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 14:34:58 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/11 17:23:00 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/11 17:30:57 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-void	assign_shared_mutexes(t_philosopher **philosophers, 
+void	assign_shared_mutexes(t_philosopher **philosophers,
 	pthread_mutex_t **shared_mutexes,
 	const int number_of_philosophers)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < number_of_philosophers)
@@ -30,7 +30,8 @@ void	assign_shared_mutexes(t_philosopher **philosophers,
 		}
 		else
 		{
-			((*philosophers)[i]).mutexes.fork.right = &((*shared_mutexes)[i + 3]);
+			((*philosophers)[i]).mutexes.fork.right
+				= &((*shared_mutexes)[i + 3]);
 		}
 		i++;
 	}

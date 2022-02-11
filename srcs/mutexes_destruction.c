@@ -6,7 +6,7 @@
 /*   By: tevan-de <tevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/11 12:21:15 by tevan-de      #+#    #+#                 */
-/*   Updated: 2022/02/11 16:29:46 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/11 17:27:03 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	destroy_all_shared_mutexes(pthread_mutex_t *mutexes,
 	const int number_of_philosophers)
 {
 	const int	total_number_of_mutexes = 2 + number_of_philosophers;
-	int	i;
+	int			i;
 
 	i = 0;
 	while (i < total_number_of_mutexes)
@@ -40,7 +40,7 @@ void	destroy_all_individual_mutexes(t_philosopher *philosophers,
 	const int number_of_philosophers)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < number_of_philosophers)
 	{

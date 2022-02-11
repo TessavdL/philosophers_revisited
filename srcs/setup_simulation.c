@@ -6,13 +6,13 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:22:15 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/11 17:09:58 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/11 17:47:34 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-static int free_and_return(t_bool *dead, t_philosopher *philosophers,
+static int	free_and_return(t_bool *dead, t_philosopher *philosophers,
 	pthread_mutex_t *shared_mutexes,
 	const int ret)
 {
@@ -29,13 +29,14 @@ static int	initialize_philosophers(t_bool *dead, t_philosopher **philosophers,
 {
 	int	i;
 
-	*philosophers = ft_calloc(sizeof(t_philosopher), data.number_of_philosophers);
+	*philosophers = ft_calloc(sizeof(t_philosopher),
+			data.number_of_philosophers);
 	if (!(*philosophers))
 	{
 		return (1);
 	}
 	if (initialize_individual_mutexes(philosophers,
-		data.number_of_philosophers))
+			data.number_of_philosophers))
 	{
 		return (1);
 	}
@@ -62,9 +63,7 @@ int	setup_simulation(t_input data, const int number_of_philosophers)
 
 	ret = 1;
 	if (initialize_shared_mutexes(&shared_mutexes, number_of_philosophers))
-	{
 		return (ret);
-	}
 	philosophers = NULL;
 	dead = ft_calloc(sizeof(t_bool), 1);
 	if (!dead)

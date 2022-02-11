@@ -6,7 +6,7 @@
 /*   By: tevan-de <tevan-de@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/04 12:14:03 by tevan-de      #+#    #+#                 */
-/*   Updated: 2022/02/11 17:06:44 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/11 17:26:41 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_bool	check_if_phil_is_dead(t_philosopher *phil)
 
 	current_time = get_time() - phil->time_start;
 	time_of_last_meal = get_time_of_last_meal(&phil->mutexes.time_of_last_meal,
-		phil->time_of_last_meal) - phil->time_start;
+			hil->time_of_last_meal) - phil->time_start;
 	if (current_time - time_of_last_meal >= phil->data.time_until_death)
 	{
 		return (TRUE);

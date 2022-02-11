@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/22 13:02:29 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/11 17:04:21 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/11 17:32:08 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ typedef struct s_philosopher
 }					t_philosopher;
 
 // check_input.c
-t_validity			check_initial_input(const int argument_count, char **arguments);
+t_validity			check_initial_input(const int argument_count,
+						char **arguments);
 t_validity			check_final_input(const int argument_count, t_input input);
 
 // eat_sleep_think.c
@@ -99,7 +100,7 @@ void				destroy_part_individual_mutexes(t_philosopher *philosophers,
 						int i);
 
 // mutexes_initialization.c
-void				assign_shared_mutexes(t_philosopher **philosophers, 
+void				assign_shared_mutexes(t_philosopher **philosophers,
 						pthread_mutex_t **shared_mutexes,
 						const int number_of_philosophers);
 int					initialize_individual_mutexes(t_philosopher **philosophers,
@@ -124,7 +125,8 @@ void				parser(const int argument_count, char **arguments,
 						t_input *input);
 
 // setup_simulation.c
-int					setup_simulation(t_input data, const int number_of_philosophers);
+int					setup_simulation(t_input data,
+						const int number_of_philosophers);
 
 // start_simulation.c
 int					start_simulation(t_philosopher *philosophers,
