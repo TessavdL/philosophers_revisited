@@ -31,16 +31,15 @@ for ((count=1; count<=$n; count++))
 	do
 	execute_tester "$1" "$2" "$3" "$4" "$5"
 done
-echo "Finished testing..."
-
-if [ $result -eq 0 ];
-	then
-		echo "ALL OK!"
-	else
-		echo "You fucking lobster"
-fi
 
 rm -f output2
 
-echo
- 
+if [ $result -eq 0 ];
+	then
+		echo -e "ALL OK!\n"
+	else
+		echo -e "You fucking lobster\n"
+		exit 1
+fi
+
+exit 0
