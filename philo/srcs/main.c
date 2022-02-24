@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   time.c                                             :+:    :+:            */
+/*   main.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/01/30 20:45:52 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/11 17:28:26 by tevan-de      ########   odam.nl         */
+/*   Created: 2022/01/21 11:43:33 by tessa         #+#    #+#                 */
+/*   Updated: 2022/02/24 15:53:18 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-long int	get_time(void)
+int	main(int argument_count, char **arguments)
 {
-	struct timeval	tv;
+	t_input	input;
 
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
-
-void	let_time_pass(long int total_time)
-{
-	long int	time;
-
-	time = 0;
-	while (time < total_time)
+	if (check_initial_input(argument_count, arguments) == INVALID)
 	{
-		usleep(100);
-		time += 100;
+		return (1);
 	}
+	parser(argument_count, arguments, &input);
+	if (check_final_input(argument_count, input) == INVALID)
+	{
+		return (1);
+	}
+	return (setup_simulation(input, input.number_of_philosophers));
 }

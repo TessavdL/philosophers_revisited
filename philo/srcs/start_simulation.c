@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 15:41:00 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/11 17:54:47 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/24 15:37:26 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	start_simulation(t_philosopher *philosophers,
 	long int	time;
 
 	i = 0;
-	time = get_time();
+	time = get_time_ms();
 	while (i < number_of_philosophers)
 	{
 		philosophers[i].time_start = time;
@@ -68,7 +68,7 @@ int	start_simulation(t_philosopher *philosophers,
 		{
 			return (1);
 		}
-		usleep(500);
+		usleep(100);
 		i++;
 	}
 	if (start_monitoring_threads(philosophers, number_of_philosophers))

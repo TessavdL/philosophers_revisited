@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/22 13:00:00 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/11 17:49:47 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/02/24 16:33:56 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,11 @@ t_validity	check_initial_input(const int argument_count, char **arguments)
 
 t_validity	check_final_input(const int argument_count, t_input input)
 {
-	if (input.number_of_philosophers > 200)
+	if (input.number_of_philosophers < 1)
 	{
 		return (INVALID);
 	}
-	if (input.time_until_death < 50)
-	{
-		return (INVALID);
-	}
-	if (input.time_to_eat < 50)
-	{
-		return (INVALID);
-	}
-	if (input.time_to_sleep < 50)
-	{
-		return (INVALID);
-	}
-	if (argument_count == 6 && input.number_of_meals < 0)
+	if (argument_count == 6 && input.number_of_meals < 1)
 	{
 		return (INVALID);
 	}
