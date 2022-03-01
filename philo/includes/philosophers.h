@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/22 13:02:29 by tessa         #+#    #+#                 */
-/*   Updated: 2022/03/01 13:29:26 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/03/01 13:35:33 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 
 # define GET 0
 # define SET 1
-
-# define NORMAL 1
 
 # include <pthread.h>
 # include <stdio.h>
