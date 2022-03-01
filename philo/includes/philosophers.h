@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/22 13:02:29 by tessa         #+#    #+#                 */
-/*   Updated: 2022/03/01 13:35:33 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/03/01 14:45:42 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,17 @@
 # define DEAD 0
 # define PRINT 1
 
-# define GET 0
-# define SET 1
-
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+
+typedef enum e_mode
+{
+	GET = 0,
+	SET = 1
+}					t_mode;
 
 typedef enum e_bool
 {
@@ -113,10 +116,11 @@ int					initialize_shared_mutexes(pthread_mutex_t **mutexes,
 
 // mutexes_utils.c
 int					print_message(t_philosopher *phil, char *message);
-long int			get_set_time_of_last_meal(int mode, pthread_mutex_t *mutex,
+long int			get_set_time_of_last_meal(t_mode mode,
+						pthread_mutex_t *mutex,
 						long int *time_of_last_meal,
 						long int new_time_of_last_meal);
-t_bool				get_set_status(int mode, pthread_mutex_t *mutex,
+t_bool				get_set_status(t_mode mode, pthread_mutex_t *mutex,
 						t_bool *status, t_bool new_status);
 int					unlock_forks(t_fork fork, int ret);
 
