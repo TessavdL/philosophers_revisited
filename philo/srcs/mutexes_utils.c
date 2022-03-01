@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/03 16:51:42 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/24 15:10:59 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/03/01 13:29:15 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,9 @@ t_bool	get_set_status(int mode, pthread_mutex_t *mutex, t_bool *status,
 	return (ret);
 }
 
-t_bool	get_status(pthread_mutex_t *mutex, t_bool status)
+int	unlock_forks(t_fork fork, int ret)
 {
-	t_bool	stat;
-
-	pthread_mutex_lock(mutex);
-	stat = status;
-	pthread_mutex_unlock(mutex);
-	return (stat);
-}
-
-void	set_status(pthread_mutex_t *mutex, t_bool *status, t_bool new_status)
-{
-	pthread_mutex_lock(mutex);
-	*status = new_status;
-	pthread_mutex_unlock(mutex);
+	pthread_mutex_unlock(fork.right);
+	pthread_mutex_unlock(fork.left);
+	return (ret);
 }

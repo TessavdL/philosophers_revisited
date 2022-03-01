@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/30 18:48:28 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/24 16:28:38 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/03/01 13:31:19 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,23 @@ static void	*one_philosopher_edge_case(t_philosopher *phil)
 	if (phil->data.number_of_philosophers == 1)
 	{
 		print_message(phil, "has taken a fork");
-		let_time_pass(phil->data.time_until_death * 1000);
-		print_message(phil, "has died");
+		let_time_pass(phil, phil->data.time_until_death);
+		print_message(phil, "died");
 	}
 	return (NULL);
 }
 
-static int	eat2(t_philosopher *phil)
+static int	update_number_of_meals_eaten(t_philosopher *phil)
 {
-	get_set_time_of_last_meal(SET, &phil->mutexes.time_of_last_meal,
-		&phil->time_of_last_meal, get_time_ms());
-	let_time_pass(phil->data.time_to_eat * 1000);
 	if (phil->data.number_of_meals != UNINITIALIZED)
 	{
 		phil->data.number_of_meals--;
 		if (phil->data.number_of_meals == 0)
 		{
 			get_set_status(SET, &phil->mutexes.full, &phil->full, TRUE);
-			pthread_mutex_unlock(phil->mutexes.fork.right);
-			pthread_mutex_unlock(phil->mutexes.fork.left);
-			return (1);
+			return (unlock_forks(phil->mutexes.fork, 1));
 		}
 	}
-	pthread_mutex_unlock(phil->mutexes.fork.right);
-	pthread_mutex_unlock(phil->mutexes.fork.left);
 	return (0);
 }
 
@@ -55,11 +48,19 @@ static int	eat(t_philosopher *phil)
 	pthread_mutex_lock(phil->mutexes.fork.right);
 	if (print_message(phil, "is eating"))
 	{
-		pthread_mutex_unlock(phil->mutexes.fork.right);
-		pthread_mutex_unlock(phil->mutexes.fork.left);
-		return (1);
+		return (unlock_forks(phil->mutexes.fork, 1));
 	}
-	return (eat2(phil));
+	get_set_time_of_last_meal(SET, &phil->mutexes.time_of_last_meal,
+		&phil->time_of_last_meal, get_time_ms());
+	if (let_time_pass(phil, phil->data.time_to_eat))
+	{
+		return (unlock_forks(phil->mutexes.fork, 1));
+	}
+	if (update_number_of_meals_eaten(phil))
+	{
+		return (unlock_forks(phil->mutexes.fork, 1));
+	}
+	return (unlock_forks(phil->mutexes.fork, 0));
 }
 
 void	*eat_sleep_think(void *ptr)
@@ -74,18 +75,13 @@ void	*eat_sleep_think(void *ptr)
 	while (1)
 	{
 		if (eat(phil))
-		{
 			break ;
-		}
 		if (print_message(phil, "is sleeping"))
-		{
 			break ;
-		}
-		let_time_pass(phil->data.time_to_sleep * 1000);
+		if (let_time_pass(phil, phil->data.time_to_sleep))
+			break ;
 		if (print_message(phil, "is thinking"))
-		{
 			break ;
-		}		
 	}
 	return (NULL);
 }

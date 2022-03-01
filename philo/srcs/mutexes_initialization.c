@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 14:34:58 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/11 17:30:57 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/03/01 11:47:41 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ void	assign_shared_mutexes(t_philosopher **philosophers,
 	i = 0;
 	while (i < number_of_philosophers)
 	{
-		((*philosophers)[i]).mutexes.dead = &((*shared_mutexes)[DEAD]);
-		((*philosophers)[i]).mutexes.print = &((*shared_mutexes)[PRINT]);
-		((*philosophers)[i]).mutexes.fork.left = &((*shared_mutexes)[i + 2]);
+		(*philosophers)[i].mutexes.dead = &((*shared_mutexes)[DEAD]);
+		(*philosophers)[i].mutexes.print = &((*shared_mutexes)[PRINT]);
+		(*philosophers)[i].mutexes.fork.left = &((*shared_mutexes)[i + 2]);
 		if (i == number_of_philosophers - 1)
 		{
-			((*philosophers)[i]).mutexes.fork.right = &((*shared_mutexes)[2]);
+			(*philosophers)[i].mutexes.fork.right = &((*shared_mutexes)[2]);
 		}
 		else
 		{
-			((*philosophers)[i]).mutexes.fork.right
+			(*philosophers)[i].mutexes.fork.right
 				= &((*shared_mutexes)[i + 3]);
 		}
 		i++;

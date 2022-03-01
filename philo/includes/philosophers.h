@@ -6,7 +6,7 @@
 /*   By: tessa <tessa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/22 13:02:29 by tessa         #+#    #+#                 */
-/*   Updated: 2022/02/24 15:11:37 by tevan-de      ########   odam.nl         */
+/*   Updated: 2022/03/01 13:29:26 by tevan-de      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 # define GET 0
 # define SET 1
+
+# define NORMAL 1
 
 # include <pthread.h>
 # include <stdio.h>
@@ -118,9 +120,7 @@ long int			get_set_time_of_last_meal(int mode, pthread_mutex_t *mutex,
 						long int new_time_of_last_meal);
 t_bool				get_set_status(int mode, pthread_mutex_t *mutex,
 						t_bool *status, t_bool new_status);
-t_bool				get_status(pthread_mutex_t *mutex, t_bool status);
-void				set_status(pthread_mutex_t *mutex, t_bool *status,
-						t_bool new_status);
+int					unlock_forks(t_fork fork, int ret);
 
 // parser.c
 void				parser(const int argument_count, char **arguments,
@@ -136,8 +136,7 @@ int					start_simulation(t_philosopher *philosophers,
 
 // time.c
 long int			get_time_ms(void);
-long int			get_time_us(void);
-void				let_time_pass(long int micro_second);
+int					let_time_pass(t_philosopher *phil, int time);
 
 // utils.c
 int					a_to_i(const char *str);
